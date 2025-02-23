@@ -2,6 +2,7 @@ header {
     background-color: #45256d; 
     padding: 10px 0;
     text-align: center;
+    position: fixed;
     width: 100%;
 }
 
@@ -10,13 +11,26 @@ header img {
     height: auto;
 }
 
-h1 {
+.sticky-container {
     text-align: center;
+    position: sticky;
+    top: 110px;
+    background: white;
+    z-index: 999;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: calc(100vh - 240px);
+    margin-top: 100px;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
+    min-width: 1200px;
 }
 
 table, th, td {
@@ -37,7 +51,7 @@ th {
     justify-content: center;
 }
 
-#export-button {
+#delete-button {
     background-color: #eb7e31;
     color: white;
     border: none;
@@ -48,7 +62,39 @@ th {
     margin-top: 20px;
 }
 
+#delete-button:hover {
+    background-color: #45256d;
+}
+
+#export-button {
+    background-color: #eb7e31;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
 #export-button:hover {
+    background-color: #45256d;
+}
+
+#clear-button {
+    background-color: #eb7e31;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+#clear-button:hover {
     background-color: #45256d;
 }
 

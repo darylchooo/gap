@@ -13,6 +13,24 @@ header img {
     height: auto;
 }
 
+#responses {
+    position: absolute;
+    top: 27.5px;
+    right: 27.5px;
+    background-color: #eb7e31;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#responses:hover {
+    background-color: white;
+    color: #45256d;
+}
+
 body {
     line-height: 1.5;
 }
@@ -83,14 +101,4 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: #45256d;
-}
-
-footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #45256d;
-    color: white;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
 }

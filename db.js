@@ -2,10 +2,10 @@ const mysql = require("mysql2");
 require("dotenv").config(); // Load environment variables from a .env file
 
 const connection = mysql.createConnection({
-    host: localhost,
-    user: root,
-    password: @*Dec2001,
-    database: gap,
+    host: "localhost",
+    user: "root",
+    password: "@*Dec2001",
+    database: "gap",
 });
 
 connection.connect((err) => {

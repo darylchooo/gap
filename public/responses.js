@@ -24,30 +24,50 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 row.innerHTML = `
                     <td>${response.id}</td>
-                    <td>${response.heartburn}</td>
-                    <td>${response.dysphagia}</td>
-                    <td>${response.fullness}</td>
-                    <td>${response.early_satiety}</td>
-                    <td>${response.postprandial_pain}</td>
-                    <td>${response.epigastric_pain}</td>
-                    <td>${response.retrosternal_discomfort}</td>
-                    <td>${response.pain_before_defecation}</td>
-                    <td>${response.difficulty_defecating}</td>
-                    <td>${response.constipation}</td>
-                    <td>${response.loose_stool}</td>
-                    <td>${response.incontinence}</td>
-                    <td>${response.urge_to_defecate}</td>
-                    <td>${response.diarrhea}</td>
-                    <td>${response.loss_of_appetite}</td>
-                    <td>${response.abdominal_pain}</td>
-                    <td>${response.sickness}</td>
-                    <td>${response.nausea}</td>
-                    <td>${response.vomiting}</td>
-                    <td>${response.bloating}</td>
-                    <td>${response.flatulence}</td>
-                    <td>${response.belching}</td>
-                    <td>${response.anxiety}</td>
-                    <td>${response.depression}</td>
+                    <td>${response.name}</td>
+                    <td>${response.patient_id}</td>
+                    <td>${response.age}</td>
+                    <td>${response.sex}</td>
+                    <td>${response.ethnicity}</td>
+                    <td>${response.weight}</td>
+                    <td>${response.height}</td>
+                    <td>${response.diagnosis}</td>
+                `;
+
+                const symptoms = [
+                    'heartburn', 'dysphagia', 'fullness', 'early_satiety', 'postprandial_pain', 'epigastric_pain', 'retrosternal_discomfort', 'pain_before_defecation', 
+                    'difficulty_defecating', 'constipation', 'loose_stool', 'incontinence', 'urge_to_defecate', 'diarrhea', 'loss_of_appetite', 'abdominal_pain', 
+                    'sickness', 'nausea', 'vomiting', 'bloating', 'flatulence', 'belching', 'anxiety', 'depression'
+                ];
+
+                symptoms.forEach(symptom => {
+                    row.innerHTML += `
+                        <td>${response[symptom]}</td>
+                        <td>${response[`${symptom}_aligns`]}</td>
+                        <td>${response[`${symptom}_represents`]}</td>
+                        <td>${response[`${symptom}_differentiates`]}</td>
+                        <td>${response[`${symptom}_misinterpret`]}</td>
+                        <td>${response[`${symptom}_misinterpret_comment`]}</td>
+                        <td>${response[`${symptom}_cultural`]}</td>
+                        <td>${response[`${symptom}_comments`]}</td>
+                        <td>${response[`${symptom}_design`]}</td>
+                        <td>${response[`${symptom}_size`]}</td>
+                        <td>${response[`${symptom}_color`]}</td>
+                        <td>${response[`${symptom}_speed`]}</td>
+                        <td>${response[`${symptom}_understood`]}</td>
+                        <td>${response[`${symptom}_design_comments`]}</td>
+                    `;
+                });
+
+                row.innerHTML += `
+                    <td>${response.sequence_order}</td>
+                    <td>${response.pictogram_count}</td>
+                    <td>${response.severity_scale}</td>
+                    <td>${response.design_quality}</td>
+                    <td>${response.distinguishable_symptoms}</td>
+                    <td>${response.easy_tool}</td>
+                    <td>${response.clinical_practice}</td>
+                    <td>${response.overall_comments}</td>
                     <td>${new Date(response.submission_date).toLocaleString()}</td>
                 `;
 

@@ -86,6 +86,36 @@ form {
 .option label.selected video {
     border-color: #007bff;
     box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+} 
+
+.domain-questions, .overall-assessment {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    width: 100%;
+    box-sizing: border-box;
+} 
+
+.overall-assessment {
+    margin-top: 20px;
+}
+
+.likert {
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+} 
+
+.likert label {
+    flex: 1;
+    text-align: center;
+}
+
+textarea {
+    width: 100%;
+    margin-top: 5px;
+    box-sizing: border-box;
 }
 
 input[type="submit"] {
@@ -101,4 +131,4 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: #45256d;
-}
+} 

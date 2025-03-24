@@ -203,7 +203,7 @@ app.post("/submit", (req, res) => {
         ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
         ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
         ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
-        ?, ?, ?, ?, ?, ?, ?)`;
+        ?, ?, ?, ?, ?, ?, NOW())`;
 
     const values = [
         name, patient_id, age, sex, ethnicity, weight, height, diagnosis, 
@@ -281,7 +281,7 @@ app.post("/submit", (req, res) => {
         depression_comments, depression_design, depression_size, depression_color, depression_speed, depression_understood, depression_design_comments,
         
         sequence_order, pictogram_count, severity_scale, design_quality, 
-        distinguishable_symptoms, easy_tool, clinical_practice, overall_comments, NOW()
+        distinguishable_symptoms, easy_tool, clinical_practice, overall_comments
     ];
 
     connection.query(sql, values, (err, result) => {

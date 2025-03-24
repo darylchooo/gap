@@ -278,6 +278,9 @@ app.post("/submit", (req, res) => {
         distinguishable_symptoms, easy_tool, clinical_practice, overall_comments
     ];
 
+    console.log("SQL Query:", sql);
+    console.log("Query Values:", values);
+    
     connection.query(sql, values, (err, result) => {
         if (err) {
             console.error("Error inserting data: " + err.stack);

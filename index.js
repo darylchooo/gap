@@ -139,7 +139,7 @@ app.post("/submit", (req, res) => {
 
 app.delete("/delete/:id", (req, res) => {
     const id = req.params.id;
-    
+
     connection.query("BEGIN", (err) => {
         if (err) {
             console.error("Error starting transaction: " + err.stack);
@@ -152,28 +152,27 @@ app.delete("/delete/:id", (req, res) => {
                 connection.query("ROLLBACK");
                 return res.status(500).send("Database error");
             }
-            
+
             // Reset IDs sequentially after deletion
             const resetQuery = `
-                SET @count = 0;
-                UPDATE responses SET id = @count := @count + 1;
-                ALTER TABLE responses AUTO_INCREMENT = 1;
+                UPDATE responses SET id = seq.nextval FROM (SELECT nextval('responses_id_seq') AS nextval) seq;
+                ALTER SEQUENCE responses_id_seq RESTART WITH 1;
             `;
-            
+
             connection.query(resetQuery, (err) => {
                 if (err) {
                     console.error("Error resetting IDs: " + err.stack);
                     connection.query("ROLLBACK");
                     return res.status(500).send("Database error");
                 }
-                
+
                 connection.query("COMMIT", (err) => {
                     if (err) {
                         console.error("Error committing transaction: " + err.stack);
                         connection.query("ROLLBACK");
                         return res.status(500).send("Database error");
                     }
-                    
+
                     res.status(200).send("Entry deleted and IDs updated");
                 });
             });

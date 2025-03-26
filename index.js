@@ -313,9 +313,14 @@ app.delete("/clear", (req, res) => {
         }
         
         // Reset auto-increment ID
-        connection.query("ALTER TABLE responses AUTO_INCREMENT = 1;");
+        connection.query("ALTER SEQUENCE responses_id_seq RESTART WITH 1;", (err) => {
+           if (err) {
+              console.error("Error resetting sequence: " + err.stack);
+              return res.status(500).send("Database error");
+           }
+           res.status(200).send("All entries deleted and IDs reset");
+        });
         
-        res.status(200).send("All entries deleted and IDs reset");
     });
 });
 

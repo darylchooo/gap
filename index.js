@@ -25,14 +25,17 @@ app.get("/responses-data", (req, res) => {
     connection.query(sql, (err, results) => {
         if (err) {
             console.error("Error retrieving data: " + err.stack);
-            res.status(500).send("Database error");
-        } else {
-            res.status(200).json(results);
+            return res.status(500).json({ error: "Database error", details: err.message }); // Send JSON response
         }
+
+        if (!Array.isArray(results)) {
+            console.error("Data retrieved is not an array:", results);
+            return res.status(500).json({ error: "Data format error", details: "Retrieved data is not an array" });
+        }
+
+        res.status(200).json(results);
     });
 });
-
-app.post("/submit", (req, res) => {
 
     const columns = [
         'name', 'patient_id', 'age', 'sex', 'ethnicity', 'weight', 'height', 'diagnosis',

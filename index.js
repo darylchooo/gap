@@ -154,10 +154,7 @@ app.delete("/delete/:id", (req, res) => {
             }
 
             // Reset IDs sequentially after deletion
-            const resetQuery = `
-                UPDATE responses SET id = seq.nextval FROM (SELECT nextval('responses_id_seq') AS nextval) seq;
-                ALTER SEQUENCE responses_id_seq RESTART WITH 1;
-            `;
+            const resetQuery = `ALTER SEQUENCE responses_id_seq RESTART WITH 1;`;
 
             connection.query(resetQuery, (err) => {
                 if (err) {

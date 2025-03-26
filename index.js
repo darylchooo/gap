@@ -21,7 +21,7 @@ app.get("/responses", (req, res) => {
 });
 
 app.get("/responses-data", (req, res) => {
-    const sql = "SELECT * FROM responses";
+    const sql = "SELECT * FROM public.responses";
     connection.query(sql, (err, results) => {
         if (err) {
             console.error("Error retrieving data: " + err.stack);

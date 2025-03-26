@@ -140,18 +140,44 @@ app.post("/submit", (req, res) => {
 app.delete("/delete/:id", (req, res) => {
     const id = req.params.id;
     
-    connection.query("DELETE FROM responses WHERE id = ?", [id], (err, result) => {
+    connection.query("BEGIN", (err) => {
         if (err) {
-            console.error("Error deleting entry: " + err.stack);
+            console.error("Error starting transaction: " + err.stack);
             return res.status(500).send("Database error");
         }
-        
-        // Reset IDs sequentially after deletion
-        connection.query("SET @count = 0;");
-        connection.query("UPDATE responses SET id = @count := @count + 1;");
-        connection.query("ALTER TABLE responses AUTO_INCREMENT = 1;");
-        
-        res.status(200).send("Entry deleted and IDs updated");
+
+        connection.query("DELETE FROM responses WHERE id = $1", [id], (err, result) => {
+            if (err) {
+                console.error("Error deleting entry: " + err.stack);
+                connection.query("ROLLBACK");
+                return res.status(500).send("Database error");
+            }
+            
+            // Reset IDs sequentially after deletion
+            const resetQuery = `
+                SET @count = 0;
+                UPDATE responses SET id = @count := @count + 1;
+                ALTER TABLE responses AUTO_INCREMENT = 1;
+            `;
+            
+            connection.query(resetQuery, (err) => {
+                if (err) {
+                    console.error("Error resetting IDs: " + err.stack);
+                    connection.query("ROLLBACK");
+                    return res.status(500).send("Database error");
+                }
+                
+                connection.query("COMMIT", (err) => {
+                    if (err) {
+                        console.error("Error committing transaction: " + err.stack);
+                        connection.query("ROLLBACK");
+                        return res.status(500).send("Database error");
+                    }
+                    
+                    res.status(200).send("Entry deleted and IDs updated");
+                });
+            });
+        });
     });
 });
 

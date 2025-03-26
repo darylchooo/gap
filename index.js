@@ -28,12 +28,12 @@ app.get("/responses-data", (req, res) => {
             return res.status(500).json({ error: "Database error", details: err.message }); // Send JSON response
         }
 
-        if (!Array.isArray(results)) {
+        if (!Array.isArray(results.rows)) {
             console.error("Data retrieved is not an array:", results);
             return res.status(500).json({ error: "Data format error", details: "Retrieved data is not an array" });
         }
 
-        res.status(200).json(results);
+        res.status(200).json(results.rows);
     });
 });
 
@@ -223,7 +223,7 @@ app.get("/export", async (req, res) => {
         connection.query("SELECT * FROM responses", async (err, results) => {
             if (err) throw err;
 
-            results.forEach(response => {
+            results.rows.forEach(response => {
                 const rowData = {
                     // Patient Information
                     id: response.id,

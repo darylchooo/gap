@@ -21,21 +21,26 @@ app.get("/responses", (req, res) => {
 });
 
 app.get("/responses-data", (req, res) => {
-    const sql = "SELECT * FROM public.responses";
+    const sql = "SELECT * FROM responses";
     connection.query(sql, (err, results) => {
         if (err) {
             console.error("Error retrieving data: " + err.stack);
-            res.status(500).send("Database error");
-        } else {
-            res.status(200).json(results);
+            return res.status(500).json({ error: "Database error", details: err.message }); // Send JSON response
         }
+
+        if (!Array.isArray(results.rows)) {
+            console.error("Data retrieved is not an array:", results);
+            return res.status(500).json({ error: "Data format error", details: "Retrieved data is not an array" });
+        }
+
+        res.status(200).json(results.rows);
     });
 });
 
 app.post("/submit", (req, res) => {
 
     const columns = [
-        'name', 'patient_id', 'age', 'sex', 'ethnicity', 'weight', 'height', 'diagnosis',
+        // 'name', 'patient_id', 'age', 'sex', 'ethnicity', 'weight', 'height', 'diagnosis',
 
         'heartburn', 'heartburn_aligns', 'heartburn_represents', 'heartburn_differentiates', 'heartburn_misinterpret', 'heartburn_misinterpret_comment', 'heartburn_cultural',
         'heartburn_comments', 'heartburn_design', 'heartburn_size', 'heartburn_color', 'heartburn_speed', 'heartburn_understood', 'heartburn_design_comments',
@@ -134,19 +139,41 @@ app.post("/submit", (req, res) => {
 
 app.delete("/delete/:id", (req, res) => {
     const id = req.params.id;
-    
-    connection.query("DELETE FROM responses WHERE id = ?", [id], (err, result) => {
+
+    connection.query("BEGIN", (err) => {
         if (err) {
-            console.error("Error deleting entry: " + err.stack);
+            console.error("Error starting transaction: " + err.stack);
             return res.status(500).send("Database error");
         }
-        
-        // Reset IDs sequentially after deletion
-        connection.query("SET @count = 0;");
-        connection.query("UPDATE responses SET id = @count := @count + 1;");
-        connection.query("ALTER TABLE responses AUTO_INCREMENT = 1;");
-        
-        res.status(200).send("Entry deleted and IDs updated");
+
+        connection.query("DELETE FROM responses WHERE id = $1", [id], (err, result) => {
+            if (err) {
+                console.error("Error deleting entry: " + err.stack);
+                connection.query("ROLLBACK");
+                return res.status(500).send("Database error");
+            }
+
+            // Reset IDs sequentially after deletion
+            const resetQuery = `ALTER SEQUENCE responses_id_seq RESTART WITH 1;`;
+
+            connection.query(resetQuery, (err) => {
+                if (err) {
+                    console.error("Error resetting IDs: " + err.stack);
+                    connection.query("ROLLBACK");
+                    return res.status(500).send("Database error");
+                }
+
+                connection.query("COMMIT", (err) => {
+                    if (err) {
+                        console.error("Error committing transaction: " + err.stack);
+                        connection.query("ROLLBACK");
+                        return res.status(500).send("Database error");
+                    }
+
+                    res.status(200).send("Entry deleted and IDs updated");
+                });
+            });
+        });
     });
 });
 
@@ -159,14 +186,15 @@ app.get("/export", async (req, res) => {
         const columns = [
             // Patient Information
             { header: "ID", key: "id", width: 8 },
-            { header: "Name", key: "name", width: 25 },
-            { header: "Patient ID", key: "patient_id", width: 15 },
-            { header: "Age", key: "age", width: 8 },
-            { header: "Sex", key: "sex", width: 8 },
-            { header: "Ethnicity", key: "ethnicity", width: 20 },
-            { header: "Weight", key: "weight", width: 10 },
-            { header: "Height", key: "height", width: 10 },
-            { header: "Diagnosis", key: "diagnosis", width: 25 }
+
+            // { header: "Name", key: "name", width: 25 },
+            // { header: "Patient ID", key: "patient_id", width: 15 },
+            // { header: "Age", key: "age", width: 8 },
+            // { header: "Sex", key: "sex", width: 8 },
+            // { header: "Ethnicity", key: "ethnicity", width: 20 },
+            // { header: "Weight", key: "weight", width: 10 },
+            // { header: "Height", key: "height", width: 10 },
+            // { header: "Diagnosis", key: "diagnosis", width: 25 }
         ];
 
         // Add Domain 1 & 2 columns for each symptom
@@ -218,18 +246,19 @@ app.get("/export", async (req, res) => {
         connection.query("SELECT * FROM responses", async (err, results) => {
             if (err) throw err;
 
-            results.forEach(response => {
+            results.rows.forEach(response => {
                 const rowData = {
                     // Patient Information
                     id: response.id,
-                    name: response.name,
-                    patient_id: response.patient_id,
-                    age: response.age,
-                    sex: response.sex,
-                    ethnicity: response.ethnicity,
-                    weight: response.weight,
-                    height: response.height,
-                    diagnosis: response.diagnosis
+
+                    // name: response.name,
+                    // patient_id: response.patient_id,
+                    // age: response.age,
+                    // sex: response.sex,
+                    // ethnicity: response.ethnicity,
+                    // weight: response.weight,
+                    // height: response.height,
+                    // diagnosis: response.diagnosis
                 };
 
                 // Add Domain 1 & 2 data for each symptom
@@ -286,9 +315,14 @@ app.delete("/clear", (req, res) => {
         }
         
         // Reset auto-increment ID
-        connection.query("ALTER TABLE responses AUTO_INCREMENT = 1;");
+        connection.query("ALTER SEQUENCE responses_id_seq RESTART WITH 1;", (err) => {
+           if (err) {
+              console.error("Error resetting sequence: " + err.stack);
+              return res.status(500).send("Database error");
+           }
+           res.status(200).send("All entries deleted and IDs reset");
+        });
         
-        res.status(200).send("All entries deleted and IDs reset");
     });
 });
 

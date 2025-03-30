@@ -58,14 +58,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     div.innerHTML = `
                         <p><strong>ID:</strong> ${response.id}</p>
 
-                        <p><strong>Name:</strong> ${response.name}</p>
-                        <p><strong>Patient ID:</strong> ${response.patient_id}</p>
-                        <p><strong>Age:</strong> ${response.age}</p>
-                        <p><strong>Sex:</strong> ${response.sex}</p>
-                        <p><strong>Ethnicity:</strong> ${response.ethnicity}</p>
-                        <p><strong>Weight:</strong> ${response.weight}</p>
-                        <p><strong>Height:</strong> ${response.height}</p>
-                        <p><strong>Diagnosis:</strong> ${response.diagnosis}</p>
+                        // <p><strong>Name:</strong> ${response.name}</p>
+                        // <p><strong>Patient ID:</strong> ${response.patient_id}</p>
+                        // <p><strong>Age:</strong> ${response.age}</p>
+                        // <p><strong>Sex:</strong> ${response.sex}</p>
+                        // <p><strong>Ethnicity:</strong> ${response.ethnicity}</p>
+                        // <p><strong>Weight:</strong> ${response.weight}</p>
+                        // <p><strong>Height:</strong> ${response.height}</p>
+                        // <p><strong>Diagnosis:</strong> ${response.diagnosis}</p>
 
                         <p><strong>Heartburn:</strong> ${response.heartburn}</p>
                         <p><strong>Aligns with medical definition:</strong> ${response.heartburn_aligns}</p>

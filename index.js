@@ -2,11 +2,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
 const connection = require("./db");
-const ExcelJS = require("exceljs");
+const ExcelJS = require("exceljs"); 
 
-const app = express();
+const app = express(); 
 
-app.use(bodyParser.json());
+app.use(bodyParser.json()); 
 
 // Serve static files (HTML, CSS, JS) from the 'public' directory
 app.use(express.static(path.join(__dirname, "public")));
@@ -14,6 +14,28 @@ app.use(express.static(path.join(__dirname, "public")));
 // Serve index.html for root path
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "index.html"));
+}); 
+
+// Check authentication 
+app.get("/authenticate", (req, res) => {
+    const authheader = req.headers.authorization; 
+
+    if (!authheader) {
+        return res.json({authenticated: false}); 
+    } else {
+        return res.json({authenticated: true}); 
+    }
+}); 
+
+// Login route
+app.post("/login", async (req, res) => {
+    const {username, password} = req.body; 
+
+    if (username == "admin" && password == "abcd1234") {
+        return res.status(200).json({ message: "Login successful" });  
+    } else {
+        return res.status(401).json({error: "You do not have access"});
+    }
 }); 
 
 app.get("/responses", (req, res) => {
@@ -25,7 +47,7 @@ app.get("/responses-data", (req, res) => {
     connection.query(sql, (err, results) => {
         if (err) {
             console.error("Error retrieving data: " + err.stack);
-            return res.status(500).json({ error: "Database error", details: err.message }); // Send JSON response
+            return res.status(500).json({ error: "Database error", details: err.message }); 
         }
 
         if (!Array.isArray(results.rows)) {
@@ -123,9 +145,6 @@ app.post("/submit", (req, res) => {
     const placeholders = columns.map((col, index) => col === 'submission_date' ? 'NOW()' : `$${index + 1}`).join(', ');
 
     const sql = `INSERT INTO responses (${columns.join(', ')}) VALUES (${placeholders})`;
-
-    console.log("SQL Query:", sql);
-    console.log("Query Values:", values);
 
     connection.query(sql, values, (err, result) => {
         if (err) {

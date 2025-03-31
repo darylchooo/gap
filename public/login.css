@@ -1,0 +1,57 @@
+.header {
+    background-color: #45256d; 
+    padding: 10px 0;
+    text-align: center;
+}
+
+header img {
+    max-width: 150px;
+    height: auto;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 75vh;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    text-align: left;
+} 
+
+input {
+    border: 1px solid black;
+    border-radius: 5px;
+} 
+
+input:focus {
+    border: 1px solid #007BFF;
+    outline: none;
+}
+
+button {
+    background-color: #eb7e31;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #45256d;
+}
+
+.error-message {
+    color: red;
+}

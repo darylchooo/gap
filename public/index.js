@@ -46,9 +46,26 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Authentication check when clicking "Responses" button
+    document.getElementById("responses").addEventListener("click", async () => {
+        const response = await fetch("/authenticate");
+        const data = await response.json();        
+
+        if (data.authenticated) {
+            fetchResponses(); // Open responses if logged in
+        } else {
+            window.location.href = "login.html"; // Redirect to login page
+        }
+    });
+
     // Function to fetch and display responses
     function fetchResponses() {
-        fetch('/responses')
+        fetch('/responses', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`
+            }
+        })
             .then(response => response.json())
             .then(data => {
                 responsesContainer.innerHTML = '';  // Clear previous data
@@ -443,7 +460,4 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Error fetching responses:', error);
             });
     }
-
-    // Fetch responses when the page loads
-    fetchResponses();
 });

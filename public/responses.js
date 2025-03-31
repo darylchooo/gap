@@ -25,14 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 row.innerHTML = `
                     <td>${response.id}</td>
 
-                    // <td>${response.name}</td>
-                    // <td>${response.patient_id}</td>
-                    // <td>${response.age}</td>
-                    // <td>${response.sex}</td>
-                    // <td>${response.ethnicity}</td>
-                    // <td>${response.weight}</td>
-                    // <td>${response.height}</td>
-                    // <td>${response.diagnosis}</td>
                 `;
 
                 const symptoms = [

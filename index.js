@@ -38,7 +38,18 @@ app.post("/login", async (req, res) => {
     }
 }); 
 
-app.get("/responses", (req, res) => {
+// Middleware to protect routes
+const authenticate = (req, res, next) => {
+    const token = req.headers.authorization;
+
+    if (!token) {
+        res.redirect("/login.html");
+    } else {
+        next();  
+    }
+}; 
+
+app.get("/responses", authenticate, (req, res) => {
     res.sendFile(path.join(__dirname, "public", "responses.html"));
 });
 

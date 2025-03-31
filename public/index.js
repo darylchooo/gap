@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Authentication check when clicking "Responses" button
+    // Check authentication when clicking "Responses" button
     document.getElementById("responses").addEventListener("click", async () => {
         const response = await fetch("/authenticate");
         const data = await response.json();        

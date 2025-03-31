@@ -31,7 +31,7 @@ app.get("/authenticate", (req, res) => {
 app.post("/login", async (req, res) => {
     const {username, password} = req.body; 
 
-    if (username == "admin" && password == "abcd1234") {
+    if (username == "Gifm" && password == "Hrim1234") {
         return res.status(200).json({ message: "Login successful" });  
     } else {
         return res.status(401).json({error: "You do not have access"});

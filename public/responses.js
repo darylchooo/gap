@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 row.innerHTML = `
                     <td>${response.id}</td>
-
+                    
                 `;
 
                 const symptoms = [

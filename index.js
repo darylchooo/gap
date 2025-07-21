@@ -75,6 +75,8 @@ app.post("/submit", (req, res) => {
     const columns = [
         // 'name', 'patient_id', 'age', 'sex', 'ethnicity', 'weight', 'height', 'diagnosis',
 
+        'expert_name',
+
         'heartburn', 'heartburn_aligns', 'heartburn_represents', 'heartburn_differentiates', 'heartburn_misinterpret', 'heartburn_misinterpret_comment', 'heartburn_cultural',
         'heartburn_comments', 'heartburn_design', 'heartburn_size', 'heartburn_color', 'heartburn_speed', 'heartburn_understood', 'heartburn_design_comments',
         
@@ -216,6 +218,7 @@ app.get("/export", async (req, res) => {
         const columns = [
             // Patient Information
             { header: "ID", key: "id", width: 8 },
+            { header: "Expert Name", key: "expert_name", width: 25 },
 
             // { header: "Name", key: "name", width: 25 },
             // { header: "Patient ID", key: "patient_id", width: 15 },
@@ -280,6 +283,7 @@ app.get("/export", async (req, res) => {
                 const rowData = {
                     // Patient Information
                     id: response.id,
+                    expert_name: response.expert_name,
 
                     // name: response.name,
                     // patient_id: response.patient_id,

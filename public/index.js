@@ -74,6 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     div.classList.add('response');
                     div.innerHTML = `
                         <p><strong>ID:</strong> ${response.id}</p>
+                        <p><strong>Expert Name:</strong> ${response.expert_name}</p>
 
                         // <p><strong>Name:</strong> ${response.name}</p>
                         // <p><strong>Patient ID:</strong> ${response.patient_id}</p>

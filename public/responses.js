@@ -27,11 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const row = document.createElement('tr');
 
                 row.innerHTML = `
-                    <td>${response.id}</td>
-
-                    // New
-                    <td>${response.expert_name}</td> 
-
+                    <td>${response.id}</td> 
                 `;
 
                 const symptoms = [

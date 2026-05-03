@@ -74,9 +74,10 @@ app.post("/submit", (req, res) => {
 
     const columns = [
         // 'name', 'patient_id', 'age', 'sex', 'ethnicity', 'weight', 'height', 'diagnosis',
-
+        
+        // New
         'expert_name',
-
+        
         'heartburn', 'heartburn_aligns', 'heartburn_represents', 'heartburn_differentiates', 'heartburn_misinterpret', 'heartburn_misinterpret_comment', 'heartburn_cultural',
         'heartburn_comments', 'heartburn_design', 'heartburn_size', 'heartburn_color', 'heartburn_speed', 'heartburn_understood', 'heartburn_design_comments',
         
@@ -218,7 +219,6 @@ app.get("/export", async (req, res) => {
         const columns = [
             // Patient Information
             { header: "ID", key: "id", width: 8 },
-            { header: "Expert Name", key: "expert_name", width: 25 },
 
             // { header: "Name", key: "name", width: 25 },
             // { header: "Patient ID", key: "patient_id", width: 15 },
@@ -230,7 +230,6 @@ app.get("/export", async (req, res) => {
             // { header: "Diagnosis", key: "diagnosis", width: 25 }
         ];
 
-        // Add Domain 1 & 2 columns for each symptom
         const symptoms = [
             'heartburn', 'dysphagia', 'fullness', 'early_satiety', 'postprandial_pain',
             'epigastric_pain', 'retrosternal_discomfort', 'pain_before_defecation',
@@ -244,30 +243,19 @@ app.get("/export", async (req, res) => {
             const symptomName = symptom.replace(/_/g, ' ');
             columns.push(
                 { header: `${symptomName} Severity`, key: symptom, width: 15 },
-                { header: `${symptomName} Aligns`, key: `${symptom}_aligns`, width: 15 },
-                { header: `${symptomName} Represents`, key: `${symptom}_represents`, width: 15 },
-                { header: `${symptomName} Differentiates`, key: `${symptom}_differentiates`, width: 15 },
-                { header: `${symptomName} Misinterpret`, key: `${symptom}_misinterpret`, width: 15 },
-                { header: `${symptomName} Misinterpret Comment`, key: `${symptom}_misinterpret_comment`, width: 25 },
-                { header: `${symptomName} Cultural`, key: `${symptom}_cultural`, width: 15 },
-                { header: `${symptomName} Comments`, key: `${symptom}_comments`, width: 25 },
-                { header: `${symptomName} Design`, key: `${symptom}_design`, width: 15 },
+                { header: `${symptomName} Understood`, key: `${symptom}_understood`, width: 15 },
                 { header: `${symptomName} Size`, key: `${symptom}_size`, width: 15 },
                 { header: `${symptomName} Color`, key: `${symptom}_color`, width: 15 },
                 { header: `${symptomName} Speed`, key: `${symptom}_speed`, width: 15 },
-                { header: `${symptomName} Understood`, key: `${symptom}_understood`, width: 15 },
-                { header: `${symptomName} Design Comments`, key: `${symptom}_design_comments`, width: 25 }
+                { header: `${symptomName} Misinterpret`, key: `${symptom}_misinterpret`, width: 15 },
+                { header: `${symptomName} Misinterpret Comment`, key: `${symptom}_misinterpret_comment`, width: 25 },
+                { header: `${symptomName} Comments`, key: `${symptom}_comments`, width: 25 },
             );
         });
 
         // Add Domain 3 columns
         columns.push(
-            { header: "Sequence Order", key: "sequence_order", width: 15 },
-            { header: "Pictogram Count", key: "pictogram_count", width: 15 },
-            { header: "Severity Scale", key: "severity_scale", width: 15 },
             { header: "Design Quality", key: "design_quality", width: 15 },
-            { header: "Distinguishable Symptoms", key: "distinguishable_symptoms", width: 20 },
-            { header: "Easy to Use", key: "easy_tool", width: 15 },
             { header: "Clinical Practice", key: "clinical_practice", width: 15 },
             { header: "Overall Comments", key: "overall_comments", width: 25 },
             { header: "Submission Date", key: "submission_date", width: 25 }
@@ -283,7 +271,6 @@ app.get("/export", async (req, res) => {
                 const rowData = {
                     // Patient Information
                     id: response.id,
-                    expert_name: response.expert_name,
 
                     // name: response.name,
                     // patient_id: response.patient_id,
@@ -298,28 +285,17 @@ app.get("/export", async (req, res) => {
                 // Add Domain 1 & 2 data for each symptom
                 symptoms.forEach(symptom => {
                     rowData[symptom] = response[symptom];
-                    rowData[`${symptom}_aligns`] = response[`${symptom}_aligns`];
-                    rowData[`${symptom}_represents`] = response[`${symptom}_represents`];
-                    rowData[`${symptom}_differentiates`] = response[`${symptom}_differentiates`];
-                    rowData[`${symptom}_misinterpret`] = response[`${symptom}_misinterpret`];
-                    rowData[`${symptom}_misinterpret_comment`] = response[`${symptom}_misinterpret_comment`];
-                    rowData[`${symptom}_cultural`] = response[`${symptom}_cultural`];
-                    rowData[`${symptom}_comments`] = response[`${symptom}_comments`];
-                    rowData[`${symptom}_design`] = response[`${symptom}_design`];
+                    rowData[`${symptom}_understood`] = response[`${symptom}_understood`];
                     rowData[`${symptom}_size`] = response[`${symptom}_size`];
                     rowData[`${symptom}_color`] = response[`${symptom}_color`];
                     rowData[`${symptom}_speed`] = response[`${symptom}_speed`];
-                    rowData[`${symptom}_understood`] = response[`${symptom}_understood`];
-                    rowData[`${symptom}_design_comments`] = response[`${symptom}_design_comments`];
+                    rowData[`${symptom}_misinterpret`] = response[`${symptom}_misinterpret`];
+                    rowData[`${symptom}_misinterpret_comment`] = response[`${symptom}_misinterpret_comment`];
+                    rowData[`${symptom}_comments`] = response[`${symptom}_comments`];
                 });
 
                 // Add Domain 3 data
-                rowData.sequence_order = response.sequence_order;
-                rowData.pictogram_count = response.pictogram_count;
-                rowData.severity_scale = response.severity_scale;
                 rowData.design_quality = response.design_quality;
-                rowData.distinguishable_symptoms = response.distinguishable_symptoms;
-                rowData.easy_tool = response.easy_tool;
                 rowData.clinical_practice = response.clinical_practice;
                 rowData.overall_comments = response.overall_comments;
                 rowData.submission_date = new Date(response.submission_date).toLocaleString();

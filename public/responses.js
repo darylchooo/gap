@@ -24,7 +24,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 row.innerHTML = `
                     <td>${response.id}</td>
-                    
+
+                    // New
+                    <td>${response.expert_name}</td> 
+
                 `;
 
                 const symptoms = [
@@ -36,29 +39,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 symptoms.forEach(symptom => {
                     row.innerHTML += `
                         <td>${response[symptom]}</td>
-                        <td>${response[`${symptom}_aligns`]}</td>
-                        <td>${response[`${symptom}_represents`]}</td>
-                        <td>${response[`${symptom}_differentiates`]}</td>
-                        <td>${response[`${symptom}_misinterpret`]}</td>
-                        <td>${response[`${symptom}_misinterpret_comment`]}</td>
-                        <td>${response[`${symptom}_cultural`]}</td>
-                        <td>${response[`${symptom}_comments`]}</td>
-                        <td>${response[`${symptom}_design`]}</td>
+                        <td>${response[`${symptom}_understood`]}</td>
                         <td>${response[`${symptom}_size`]}</td>
                         <td>${response[`${symptom}_color`]}</td>
                         <td>${response[`${symptom}_speed`]}</td>
-                        <td>${response[`${symptom}_understood`]}</td>
-                        <td>${response[`${symptom}_design_comments`]}</td>
+                        <td>${response[`${symptom}_misinterpret`]}</td>
+                        <td>${response[`${symptom}_misinterpret_comment`]}</td>
+                        <td>${response[`${symptom}_comments`]}</td>
                     `;
                 });
 
                 row.innerHTML += `
-                    <td>${response.sequence_order}</td>
-                    <td>${response.pictogram_count}</td>
-                    <td>${response.severity_scale}</td>
                     <td>${response.design_quality}</td>
-                    <td>${response.distinguishable_symptoms}</td>
-                    <td>${response.easy_tool}</td>
                     <td>${response.clinical_practice}</td>
                     <td>${response.overall_comments}</td>
                     <td>${new Date(response.submission_date).toLocaleString()}</td>

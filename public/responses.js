@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <td>${response.id}</td>
 
                     // New
-                    <td>${response.expert_name}</td> 
+                    // <td>${response.expert_name}</td> 
 
                 `;
 

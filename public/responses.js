@@ -11,7 +11,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 })
                 .catch(error => console.error("Error:", error));
         }
-    });
+    }); 
+
+    function yesNo(value) {
+        return value == 1 ? "Yes" : "No";
+    }
     
     fetch('/responses-data')
         .then(response => response.json())
@@ -26,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <td>${response.id}</td>
 
                     // New
-                    // <td>${response.expert_name}</td> 
+                    <td>${response.expert_name}</td> 
 
                 `;
 
@@ -43,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <td>${response[`${symptom}_size`]}</td>
                         <td>${response[`${symptom}_color`]}</td>
                         <td>${response[`${symptom}_speed`]}</td>
-                        <td>${response[`${symptom}_misinterpret`]}</td>
+                        <td>${yesNo(response[`${symptom}_misinterpret`])}</td>
                         <td>${response[`${symptom}_misinterpret_comment`]}</td>
                         <td>${response[`${symptom}_comments`]}</td>
                     `;

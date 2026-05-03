@@ -56,7 +56,11 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             window.location.href = "login.html"; // Redirect to login page
         }
-    });
+    }); 
+
+    function yesNo(value) {
+        return value == 1 ? "Yes" : "No";
+    }
 
     // Function to fetch and display responses
     function fetchResponses() {
@@ -90,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p><strong>Size appropriate:</strong> ${response.heartburn_size}</p>
                         <p><strong>Color appropriate:</strong> ${response.heartburn_color}</p>
                         <p><strong>Speed appropriate:</strong> ${response.heartburn_speed}</p>
-                        <p><strong>Misinterpretation:</strong> ${response.heartburn_misinterpret}</p>
+                        <p><strong>Misinterpretation:</strong> ${yesNo(response.heartburn_misinterpret)}</p>
                         <p><strong>Misinterpretation comment:</strong> ${response.heartburn_misinterpret_comment}</p>
                         <p><strong>Comments:</strong> ${response.heartburn_comments}</p>
 
@@ -99,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p><strong>Size appropriate:</strong> ${response.dysphagia_size}</p>
                         <p><strong>Color appropriate:</strong> ${response.dysphagia_color}</p>
                         <p><strong>Speed appropriate:</strong> ${response.dysphagia_speed}</p>
-                        <p><strong>Misinterpretation:</strong> ${response.dysphagia_misinterpret}</p>
+                        <p><strong>Misinterpretation:</strong> ${yesNo(response.dysphagia_misinterpret)}</p>
                         <p><strong>Misinterpretation comment:</strong> ${response.dysphagia_misinterpret_comment}</p>
                         <p><strong>Comments:</strong> ${response.dysphagia_comments}</p>
 
@@ -108,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p><strong>Size appropriate:</strong> ${response.fullness_size}</p>
                         <p><strong>Color appropriate:</strong> ${response.fullness_color}</p>
                         <p><strong>Speed appropriate:</strong> ${response.fullness_speed}</p>
-                        <p><strong>Misinterpretation:</strong> ${response.fullness_misinterpret}</p>
+                        <p><strong>Misinterpretation:</strong> ${yesNo(response.fullness_misinterpret)}</p>
                         <p><strong>Misinterpretation comment:</strong> ${response.fullness_misinterpret_comment}</p>
                         <p><strong>Comments:</strong> ${response.fullness_comments}</p>
 
@@ -117,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p><strong>Size appropriate:</strong> ${response.early_satiety_size}</p>
                         <p><strong>Color appropriate:</strong> ${response.early_satiety_color}</p>
                         <p><strong>Speed appropriate:</strong> ${response.early_satiety_speed}</p>
-                        <p><strong>Misinterpretation:</strong> ${response.early_satiety_misinterpret}</p>
+                        <p><strong>Misinterpretation:</strong> ${yesNo(response.early_satiety_misinterpret)}</p>
                         <p><strong>Misinterpretation comment:</strong> ${response.early_satiety_misinterpret_comment}</p>
                         <p><strong>Comments:</strong> ${response.early_satiety_comments}</p>
 
@@ -126,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p><strong>Size appropriate:</strong> ${response.postprandial_pain_size}</p>
                         <p><strong>Color appropriate:</strong> ${response.postprandial_pain_color}</p>
                         <p><strong>Speed appropriate:</strong> ${response.postprandial_pain_speed}</p>
-                        <p><strong>Misinterpretation:</strong> ${response.postprandial_pain_misinterpret}</p>
+                        <p><strong>Misinterpretation:</strong> ${yesNo(response.postprandial_pain_misinterpret)}</p>
                         <p><strong>Misinterpretation comment:</strong> ${response.postprandial_pain_misinterpret_comment}</p>
                         <p><strong>Comments:</strong> ${response.postprandial_pain_comments}</p>
 
@@ -135,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p><strong>Size appropriate:</strong> ${response.epigastric_pain_size}</p>
                         <p><strong>Color appropriate:</strong> ${response.epigastric_pain_color}</p>
                         <p><strong>Speed appropriate:</strong> ${response.epigastric_pain_speed}</p>
-                        <p><strong>Misinterpretation:</strong> ${response.epigastric_pain_misinterpret}</p>
+                        <p><strong>Misinterpretation:</strong> ${yesNo(response.epigastric_pain_misinterpret)}</p>
                         <p><strong>Misinterpretation comment:</strong> ${response.epigastric_pain_misinterpret_comment}</p>
                         <p><strong>Comments:</strong> ${response.epigastric_pain_comments}</p>
 
@@ -144,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p><strong>Size appropriate:</strong> ${response.retrosternal_discomfort_size}</p>
                         <p><strong>Color appropriate:</strong> ${response.retrosternal_discomfort_color}</p>
                         <p><strong>Speed appropriate:</strong> ${response.retrosternal_discomfort_speed}</p>
-                        <p><strong>Misinterpretation:</strong> ${response.retrosternal_discomfort_misinterpret}</p>
+                        <p><strong>Misinterpretation:</strong> ${yesNo(response.retrosternal_discomfort_misinterpret)}</p>
                         <p><strong>Misinterpretation comment:</strong> ${response.retrosternal_discomfort_misinterpret_comment}</p>
                         <p><strong>Comments:</strong> ${response.retrosternal_discomfort_comments}</p>
 
@@ -153,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p><strong>Size appropriate:</strong> ${response.pain_before_defecation_size}</p>
                         <p><strong>Color appropriate:</strong> ${response.pain_before_defecation_color}</p>
                         <p><strong>Speed appropriate:</strong> ${response.pain_before_defecation_speed}</p>
-                        <p><strong>Misinterpretation:</strong> ${response.pain_before_defecation_misinterpret}</p>
+                        <p><strong>Misinterpretation:</strong> ${yesNo(response.pain_before_defecation_misinterpret)}</p>
                         <p><strong>Misinterpretation comment:</strong> ${response.pain_before_defecation_misinterpret_comment}</p>
                         <p><strong>Comments:</strong> ${response.pain_before_defecation_comments}</p>
 
@@ -162,7 +166,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p><strong>Size appropriate:</strong> ${response.difficulty_defecating_size}</p>
                         <p><strong>Color appropriate:</strong> ${response.difficulty_defecating_color}</p>
                         <p><strong>Speed appropriate:</strong> ${response.difficulty_defecating_speed}</p>
-                        <p><strong>Misinterpretation:</strong> ${response.difficulty_defecating_misinterpret}</p>
+                        <p><strong>Misinterpretation:</strong> ${yesNo(response.difficulty_defecating_misinterpret)}</p>
                         <p><strong>Misinterpretation comment:</strong> ${response.difficulty_defecating_misinterpret_comment}</p>
                         <p><strong>Comments:</strong> ${response.difficulty_defecating_comments}</p>
 
@@ -171,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p><strong>Size appropriate:</strong> ${response.constipation_size}</p>
                         <p><strong>Color appropriate:</strong> ${response.constipation_color}</p>
                         <p><strong>Speed appropriate:</strong> ${response.constipation_speed}</p>
-                        <p><strong>Misinterpretation:</strong> ${response.constipation_misinterpret}</p>
+                        <p><strong>Misinterpretation:</strong> ${yesNo(response.constipation_misinterpret)}</p>
                         <p><strong>Misinterpretation comment:</strong> ${response.constipation_misinterpret_comment}</p>
                         <p><strong>Comments:</strong> ${response.constipation_comments}</p>
 
@@ -180,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p><strong>Size appropriate:</strong> ${response.loose_stool_size}</p>
                         <p><strong>Color appropriate:</strong> ${response.loose_stool_color}</p>
                         <p><strong>Speed appropriate:</strong> ${response.loose_stool_speed}</p>
-                        <p><strong>Misinterpretation:</strong> ${response.loose_stool_misinterpret}</p>
+                        <p><strong>Misinterpretation:</strong> ${yesNo(response.loose_stool_misinterpret)}</p>
                         <p><strong>Misinterpretation comment:</strong> ${response.loose_stool_misinterpret_comment}</p>
                         <p><strong>Comments:</strong> ${response.loose_stool_comments}</p>
 
@@ -189,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p><strong>Size appropriate:</strong> ${response.incontinence_size}</p>
                         <p><strong>Color appropriate:</strong> ${response.incontinence_color}</p>
                         <p><strong>Speed appropriate:</strong> ${response.incontinence_speed}</p>
-                        <p><strong>Misinterpretation:</strong> ${response.incontinence_misinterpret}</p>
+                        <p><strong>Misinterpretation:</strong> ${yesNo(response.incontinence_misinterpret)}</p>
                         <p><strong>Misinterpretation comment:</strong> ${response.incontinence_misinterpret_comment}</p>
                         <p><strong>Comments:</strong> ${response.incontinence_comments}</p>
 
@@ -198,7 +202,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p><strong>Size appropriate:</strong> ${response.urge_to_defecate_size}</p>
                         <p><strong>Color appropriate:</strong> ${response.urge_to_defecate_color}</p>
                         <p><strong>Speed appropriate:</strong> ${response.urge_to_defecate_speed}</p>
-                        <p><strong>Misinterpretation:</strong> ${response.urge_to_defecate_misinterpret}</p>
+                        <p><strong>Misinterpretation:</strong> ${yesNo(response.urge_to_defecate_misinterpret)}</p>
                         <p><strong>Misinterpretation comment:</strong> ${response.urge_to_defecate_misinterpret_comment}</p>
                         <p><strong>Comments:</strong> ${response.urge_to_defecate_comments}</p>
 
@@ -207,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p><strong>Size appropriate:</strong> ${response.diarrhea_size}</p>
                         <p><strong>Color appropriate:</strong> ${response.diarrhea_color}</p>
                         <p><strong>Speed appropriate:</strong> ${response.diarrhea_speed}</p>
-                        <p><strong>Misinterpretation:</strong> ${response.diarrhea_misinterpret}</p>
+                        <p><strong>Misinterpretation:</strong> ${yesNo(response.diarrhea_misinterpret)}</p>
                         <p><strong>Misinterpretation comment:</strong> ${response.diarrhea_misinterpret_comment}</p>
                         <p><strong>Comments:</strong> ${response.diarrhea_comments}</p>
 
@@ -216,7 +220,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p><strong>Size appropriate:</strong> ${response.loss_of_appetite_size}</p>
                         <p><strong>Color appropriate:</strong> ${response.loss_of_appetite_color}</p>
                         <p><strong>Speed appropriate:</strong> ${response.loss_of_appetite_speed}</p>
-                        <p><strong>Misinterpretation:</strong> ${response.loss_of_appetite_misinterpret}</p>
+                        <p><strong>Misinterpretation:</strong> ${yesNo(response.loss_of_appetite_misinterpret)}</p>
                         <p><strong>Misinterpretation comment:</strong> ${response.loss_of_appetite_misinterpret_comment}</p>
                         <p><strong>Comments:</strong> ${response.loss_of_appetite_comments}</p>
 
@@ -225,7 +229,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p><strong>Size appropriate:</strong> ${response.abdominal_pain_size}</p>
                         <p><strong>Color appropriate:</strong> ${response.abdominal_pain_color}</p>
                         <p><strong>Speed appropriate:</strong> ${response.abdominal_pain_speed}</p>
-                        <p><strong>Misinterpretation:</strong> ${response.abdominal_pain_misinterpret}</p>
+                        <p><strong>Misinterpretation:</strong> ${yesNo(response.abdominal_pain_misinterpret)}</p>
                         <p><strong>Misinterpretation comment:</strong> ${response.abdominal_pain_misinterpret_comment}</p>
                         <p><strong>Comments:</strong> ${response.abdominal_pain_comments}</p>
 
@@ -234,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p><strong>Size appropriate:</strong> ${response.sickness_size}</p>
                         <p><strong>Color appropriate:</strong> ${response.sickness_color}</p>
                         <p><strong>Speed appropriate:</strong> ${response.sickness_speed}</p>
-                        <p><strong>Misinterpretation:</strong> ${response.sickness_misinterpret}</p>
+                        <p><strong>Misinterpretation:</strong> ${yesNo(response.sickness_misinterpret)}</p>
                         <p><strong>Misinterpretation comment:</strong> ${response.sickness_misinterpret_comment}</p>
                         <p><strong>Comments:</strong> ${response.sickness_comments}</p>
 
@@ -243,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p><strong>Size appropriate:</strong> ${response.nausea_size}</p>
                         <p><strong>Color appropriate:</strong> ${response.nausea_color}</p>
                         <p><strong>Speed appropriate:</strong> ${response.nausea_speed}</p>
-                        <p><strong>Misinterpretation:</strong> ${response.nausea_misinterpret}</p>
+                        <p><strong>Misinterpretation:</strong> ${yesNo(response.nausea_misinterpret)}</p>
                         <p><strong>Misinterpretation comment:</strong> ${response.nausea_misinterpret_comment}</p>
                         <p><strong>Comments:</strong> ${response.nausea_comments}</p>
 
@@ -252,7 +256,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p><strong>Size appropriate:</strong> ${response.vomiting_size}</p>
                         <p><strong>Color appropriate:</strong> ${response.vomiting_color}</p>
                         <p><strong>Speed appropriate:</strong> ${response.vomiting_speed}</p>
-                        <p><strong>Misinterpretation:</strong> ${response.vomiting_misinterpret}</p>
+                        <p><strong>Misinterpretation:</strong> ${yesNo(response.vomiting_misinterpret)}</p>
                         <p><strong>Misinterpretation comment:</strong> ${response.vomiting_misinterpret_comment}</p>
                         <p><strong>Comments:</strong> ${response.vomiting_comments}</p>
 
@@ -261,7 +265,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p><strong>Size appropriate:</strong> ${response.bloating_size}</p>
                         <p><strong>Color appropriate:</strong> ${response.bloating_color}</p>
                         <p><strong>Speed appropriate:</strong> ${response.bloating_speed}</p>
-                        <p><strong>Misinterpretation:</strong> ${response.bloating_misinterpret}</p>
+                        <p><strong>Misinterpretation:</strong> ${yesNo(response.bloating_misinterpret)}</p>
                         <p><strong>Misinterpretation comment:</strong> ${response.bloating_misinterpret_comment}</p>
                         <p><strong>Comments:</strong> ${response.bloating_comments}</p>
 
@@ -270,7 +274,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p><strong>Size appropriate:</strong> ${response.flatulence_size}</p>
                         <p><strong>Color appropriate:</strong> ${response.flatulence_color}</p>
                         <p><strong>Speed appropriate:</strong> ${response.flatulence_speed}</p>
-                        <p><strong>Misinterpretation:</strong> ${response.flatulence_misinterpret}</p>
+                        <p><strong>Misinterpretation:</strong> ${yesNo(response.flatulence_misinterpret)}</p>
                         <p><strong>Misinterpretation comment:</strong> ${response.flatulence_misinterpret_comment}</p>
                         <p><strong>Comments:</strong> ${response.flatulence_comments}</p>
 
@@ -279,7 +283,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p><strong>Size appropriate:</strong> ${response.belching_size}</p>
                         <p><strong>Color appropriate:</strong> ${response.belching_color}</p>
                         <p><strong>Speed appropriate:</strong> ${response.belching_speed}</p>
-                        <p><strong>Misinterpretation:</strong> ${response.belching_misinterpret}</p>
+                        <p><strong>Misinterpretation:</strong> ${yesNo(response.belching_misinterpret)}</p>
                         <p><strong>Misinterpretation comment:</strong> ${response.belching_misinterpret_comment}</p>
                         <p><strong>Comments:</strong> ${response.belching_comments}</p>
 
@@ -288,7 +292,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p><strong>Size appropriate:</strong> ${response.anxiety_size}</p>
                         <p><strong>Color appropriate:</strong> ${response.anxiety_color}</p>
                         <p><strong>Speed appropriate:</strong> ${response.anxiety_speed}</p>
-                        <p><strong>Misinterpretation:</strong> ${response.anxiety_misinterpret}</p>
+                        <p><strong>Misinterpretation:</strong> ${yesNo(response.anxiety_misinterpret)}</p>
                         <p><strong>Misinterpretation comment:</strong> ${response.anxiety_misinterpret_comment}</p>
                         <p><strong>Comments:</strong> ${response.anxiety_comments}</p>
 
@@ -297,7 +301,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <p><strong>Size appropriate:</strong> ${response.depression_size}</p>
                         <p><strong>Color appropriate:</strong> ${response.depression_color}</p>
                         <p><strong>Speed appropriate:</strong> ${response.depression_speed}</p>
-                        <p><strong>Misinterpretation:</strong> ${response.depression_misinterpret}</p>
+                        <p><strong>Misinterpretation:</strong> ${yesNo(response.depression_misinterpret)}</p>
                         <p><strong>Misinterpretation comment:</strong> ${response.depression_misinterpret_comment}</p>
                         <p><strong>Comments:</strong> ${response.depression_comments}</p>
 

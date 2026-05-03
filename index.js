@@ -210,6 +210,10 @@ app.delete("/delete/:id", (req, res) => {
     });
 });
 
+function yesNo(value) {
+    return value == 1 ? "Yes" : "No";
+}
+
 app.get("/export", async (req, res) => {
     try {
         const workbook = new ExcelJS.Workbook();
@@ -289,7 +293,7 @@ app.get("/export", async (req, res) => {
                     rowData[`${symptom}_size`] = response[`${symptom}_size`];
                     rowData[`${symptom}_color`] = response[`${symptom}_color`];
                     rowData[`${symptom}_speed`] = response[`${symptom}_speed`];
-                    rowData[`${symptom}_misinterpret`] = response[`${symptom}_misinterpret`];
+                    rowData[`${symptom}_misinterpret`] = yesNo(response[`${symptom}_misinterpret`]);
                     rowData[`${symptom}_misinterpret_comment`] = response[`${symptom}_misinterpret_comment`];
                     rowData[`${symptom}_comments`] = response[`${symptom}_comments`];
                 });
